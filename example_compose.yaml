@@ -1,0 +1,38 @@
+name: bot
+services:
+  db:
+    image: mariadb
+    restart: always
+    network_mode: bridge
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: true
+      # 以下环境变量需和 data/conf.toml 一致
+      MARIADB_USER: user
+      MARIADB_PASSWORD: P@55w0rd
+      MARIADB_DATABASE: databasename
+  
+  redis:
+    image: redis
+    restart: always
+    network_mode: bridge
+
+  mongo:
+    image: mongo
+    restart: always
+    network_mode: bridge
+    environment:
+      # 以下环境变量需和 data/conf.toml 一致
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: P@55w0rd
+
+  core:
+    build:
+      context: .
+    volumes:
+      - "./data:/usr/src/myapp/data"
+    restart: always
+    network_mode: bridge
+    links:
+      - db
+      - mongo
+      - redis
