@@ -161,9 +161,10 @@ pub async fn music_callback(bot: Bot, q: CallbackQuery) -> Result<(), BotError> 
             None => return Ok(()),
             Some(mbi_msg) => match mbi_msg {
                 MaybeInaccessibleMessage::Inaccessible(_) => return Ok(()),
-                MaybeInaccessibleMessage::Regular(msg) => msg,
+                MaybeInaccessibleMessage::Regular(mbi_msg) => mbi_msg,
             },
         };
+
         let _guard = lock!((msg.chat.id, msg.id));
         match music.next() {
             Some("gui") => get_music_gui(bot, *msg, music.next().unwrap()).await?,
