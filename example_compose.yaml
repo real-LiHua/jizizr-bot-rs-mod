@@ -8,7 +8,7 @@ services:
       MARIADB_RANDOM_ROOT_PASSWORD: true
       # 以下环境变量需和 data/conf.toml 一致
       MARIADB_USER: user
-      MARIADB_PASSWORD: P@55w0rd
+      MARIADB_PASSWORD: Pa55w0rd
       MARIADB_DATABASE: databasename
   
   redis:
@@ -23,7 +23,7 @@ services:
     environment:
       # 以下环境变量需和 data/conf.toml 一致
       MONGO_INITDB_ROOT_USERNAME: user
-      MONGO_INITDB_ROOT_PASSWORD: P@55w0rd
+      MONGO_INITDB_ROOT_PASSWORD: Pa55w0rd
 
   core:
     build:

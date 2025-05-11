@@ -1,0 +1,25 @@
+[bot]
+owner=777000  # 你的 user id，可向 `https://t.me/MissRose_bot` 发送 `/info` 获取
+token='*************************' # bot token，到 `https://t.me/BotFather` 获取
+
+[url]
+url='' # webhook url，可以留空
+
+[db]
+# 如果使用 docker compose，以下 url 中的用户名、密码、服务名、端口、数据库名 需和 docker compose 配置文件一致
+# 样例中的端口号为默认端口号
+mysql.url='mysql://user:Pa55w0rd@db:3306/databasename'
+redis.url='redis://redis:6379'
+mongo.url='mongodb://user:Pa55w0rd@mongo:27017'
+
+[gemini]
+key=''
+
+[api]
+music=""
+
+[ping_server]
+
+[vv]
+api_url=''
+pic_url=''
