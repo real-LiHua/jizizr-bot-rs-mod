@@ -45,13 +45,13 @@ async fn main() -> Result<(), Box<dyn Error>> {
     )
     .await;
 
-    let mode = std::env::var("MODE").unwrap_or_default();
-    if mode == "r" {
-        BOT.set_my_commands(Cmd::bot_commands())
-            .await
-            .expect("Couldn't set commands");
+    BOT.set_my_commands(Cmd::bot_commands())
+        .await
+        .expect("Couldn't set commands");
+
+    let url = &settings::SETTINGS.url.url;
+    if url != "" {
         let addr = ([127, 0, 0, 1], 12345).into();
-        let url = &settings::SETTINGS.url.url;
         let url = url.parse().unwrap();
         let listener = webhooks::axum(BOT.clone(), webhooks::Options::new(addr, url))
             .await
