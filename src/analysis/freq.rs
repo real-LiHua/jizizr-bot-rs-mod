@@ -1,10 +1,13 @@
 use std::collections::HashMap;
 
-use charts_rs::{LineChart, Series, THEME_GRAFANA, svg_to_webp};
+use charts_rs::{LineChart, Series, THEME_GRAFANA, get_or_try_init_fonts, svg_to_webp};
 
 use crate::BotError;
 
 pub fn paint(datas: HashMap<String, HashMap<u8, f32>>) -> Result<Vec<u8>, BotError> {
+    let data = include_bytes!("../../data/font.ttf") as &[u8];
+    get_or_try_init_fonts(Some(vec![data])).unwrap();
+
     let series = datas
         .into_iter()
         .map(|(k, v)| Series {
