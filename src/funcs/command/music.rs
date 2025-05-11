@@ -166,10 +166,10 @@ pub async fn music_callback(bot: Bot, q: CallbackQuery) -> Result<(), BotError> 
         };
         let _guard = lock!((msg.chat.id, msg.id));
         match music.next() {
-            Some("gui") => get_music_gui(bot, msg, music.next().unwrap()).await?,
-            Some("cover") => get_music_cover(bot, msg, music.next().unwrap()).await?,
+            Some("gui") => get_music_gui(bot, *msg, music.next().unwrap()).await?,
+            Some("cover") => get_music_cover(bot, *msg, music.next().unwrap()).await?,
             Some(music_name) => {
-                get_callback_music(bot, msg, music_name, music.next().unwrap()).await?
+                get_callback_music(bot, *msg, music_name, music.next().unwrap()).await?
             }
             None => {
                 return Err(BotError::Custom(
