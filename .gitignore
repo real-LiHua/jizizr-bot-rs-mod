@@ -7,3 +7,4 @@ URL
 .DS_Store
 /.idea
 src/funcs/command/test.rs
+/compose.yaml

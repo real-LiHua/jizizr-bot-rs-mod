@@ -23,6 +23,7 @@ pub fn paint(datas: HashMap<String, HashMap<u8, f32>>) -> Result<Vec<u8>, BotErr
         (0..24).map(|i| i.to_string()).collect(),
         THEME_GRAFANA,
     );
+    line_chart.font_family = "Lolita".to_string();
     line_chart.series_smooth = true;
     svg_to_webp(&line_chart.svg()?)
         .map_err(|e| BotError::Custom(format!("failed to convert svg to webp: {}", e)))

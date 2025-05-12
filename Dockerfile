@@ -12,6 +12,7 @@ COPY data data
 
 RUN cargo build -r --offline
 
+
 FROM debian:bookworm-slim
 
 WORKDIR /usr/src/myapp
