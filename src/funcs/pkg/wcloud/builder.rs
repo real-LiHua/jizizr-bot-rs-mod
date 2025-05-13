@@ -15,7 +15,7 @@ lazy_static! {
             .with_tokenizer(tokenizer)
             .with_word_rotate_chance(0.1)
             .with_background_color(Rgba([255, 255, 255, 255]))
-            .with_font_from_path("./data/font.ttf".into())
+            .with_font_from_path("./data/wcloud.ttf".into())
     };
     static ref MASK: ImageBuffer<Luma<u8>, Vec<u8>> = {
         let mut file = File::open("./data/mask.png").expect("Unable to open mask file");

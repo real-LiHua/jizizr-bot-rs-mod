@@ -1,12 +1,14 @@
 use std::collections::HashMap;
-
-use charts_rs::{LineChart, Series, THEME_GRAFANA, get_or_try_init_fonts, svg_to_webp};
+use std::fs;
 
 use crate::BotError;
+use charts_rs::{
+    LineChart, Series, THEME_GRAFANA, get_font_families, get_or_try_init_fonts, svg_to_webp,
+};
 
 pub fn paint(datas: HashMap<String, HashMap<u8, f32>>) -> Result<Vec<u8>, BotError> {
-    let data = include_bytes!("../../data/font.ttf") as &[u8];
-    get_or_try_init_fonts(Some(vec![data])).unwrap();
+    let buf = fs::read("data/freq.ttf").unwrap();
+    let _ = get_or_try_init_fonts(Some(vec![&buf]));
 
     let series = datas
         .into_iter()
@@ -23,7 +25,14 @@ pub fn paint(datas: HashMap<String, HashMap<u8, f32>>) -> Result<Vec<u8>, BotErr
         (0..24).map(|i| i.to_string()).collect(),
         THEME_GRAFANA,
     );
-    line_chart.font_family = "Lolita".to_string();
+
+    for family in get_font_families().unwrap().iter() {
+        let name = family.to_string();
+        if name != "Roboto".to_string() {
+            line_chart.font_family = name;
+            break;
+        }
+    }
     line_chart.series_smooth = true;
     svg_to_webp(&line_chart.svg()?)
         .map_err(|e| BotError::Custom(format!("failed to convert svg to webp: {}", e)))
