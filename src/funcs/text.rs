@@ -87,7 +87,23 @@ pub fn init() -> Option<()> {
         six::six => "6",
         repeat::repeat => "复读机",
         fuck_b23::fuck_b23 => "去除b站短链跟踪参数",
-        guozao::guozao => "play的一环"
+        guozao::guozao => "play的一环",
+        hitokoto::hitokoto => "名人名言",
+        coin::coin => "获取实时虚拟货币价格",
+        id::id => "获取自己的id",
+        today::today => "历史上的今天",
+        wiki::wiki => "维基一下",
+        short::short => "生成短链接",
+        rate::rate => "查询实时汇率",
+        wcloud::wcloud => "生成词云",
+        wcloud::user_freq => "用户发言统计",
+        curl::curl => "curl",
+        music::music => "音乐",
+        chat::chat => "Ai聊天",
+        translate::translate => "翻译",
+        ping::ping => "Ping",
+        vv::vv => "vv不削能玩？",
+        count::count => "用户发言统计",
     );
     tokio::spawn(SWITCH.pstorer.pool());
     Some(())

@@ -1,6 +1,7 @@
 use crate::{
     analysis::model::{BotLogBuilder, MessageStatus},
     dao::mongo::analysis::insert_log,
+    funcs::text::SWITCH,
 };
 
 use super::*;
@@ -139,7 +140,17 @@ macro_rules! cmd_match {
                     .map_err(|e| e.into())
             }
             $(
-                Cmd::$stat => $func($bot, $msg).await,
+
+                Cmd::$stat => {
+                    if SWITCH.get_status($msg.chat.id.0, stringify!($func).to_string()) {
+                        $func($bot, $msg).await
+                    } else {
+                        $bot.send_message($msg.chat.id, "命令未启用".to_string())
+                            .await
+                            .map(|_| ())
+                            .map_err(|e| e.into())
+                    }
+                }
             )+
         }
     };
